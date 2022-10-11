@@ -89,11 +89,14 @@ def quiz2():
 		inputJudge = False
 
 		while (not inputJudge):
-			answer = int(input()) -1
-			if (answer <= 2 and answer >= 0):
-				checkAnswer(choice[answer])
-				inputJudge = True
-			else:
+			try:
+				answer = int(input()) -1
+				if (answer <= 2 and answer >= 0):
+					checkAnswer(choice[answer])
+					inputJudge = True
+				else:
+					print("正しい選択肢の番号を入力してください: ", end="")
+			except:
 				print("正しい選択肢の番号を入力してください: ", end="")
 
 		if i != len(quizNum):
@@ -141,14 +144,17 @@ def main():
 
 	inputJudge = False
 	while (not inputJudge):
-		modeselect = int(input())
-		if (modeselect == 1):
-			quiz1()
-			inputJudge = True
-		elif (modeselect == 2):
-			quiz2()
-			inputJudge = True
-		else:
+		try: 
+			modeselect = int(input())
+			if (modeselect == 1):
+				quiz1()
+				inputJudge = True
+			elif (modeselect == 2):
+				quiz2()
+				inputJudge = True
+			else:
+				print("正しい選択肢の番号を入力してください: ", end="")
+		except:
 			print("正しい選択肢の番号を入力してください: ", end="")
 		
 	print("得点は "+ str(Points)+"/" + str(questionsNum) + "点です！")
