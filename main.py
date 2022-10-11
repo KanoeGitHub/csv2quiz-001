@@ -115,7 +115,8 @@ def createChoice():
 	while (quizNum[0] == randValue or randValue == randValue2):
 		randValue2 = random.randint(0,len(words)-1)
 	choice[2] = words[randValue2]
-	
+
+	random.shuffle(choice)
 
 def main():
 	argCheck()
@@ -136,8 +137,6 @@ def main():
 		
 	random.shuffle(quizNum)
 	
-	print(words[quizNum[0]])
-
 	print("どちらのクイズを選びますか?（1: 一致/2: 三択）")
 
 	inputJudge = False
@@ -154,7 +153,7 @@ def main():
 		
 	print("得点は "+ str(Points)+"/" + str(questionsNum) + "点です！")
 	print("End Quiz")
-		
+	
 	
 if __name__ == "__main__":
 	main()
