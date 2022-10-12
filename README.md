@@ -8,7 +8,7 @@ csv to quiz project
 `./main.exe <csv-path> <ansewer-column-name> <question-column-name>`
 
 ※If "test.csv" is in the same directory as the executable file, it can be executed without arguments.  
-※The second and third arguments are "word" and "sent" by default.　　
+※The second and third arguments are "answer" and "question" by default.　　
 
 ---
 

@@ -9,8 +9,8 @@ import sys
 words = []
 sentences = []
 filepath = './test.csv'
-wordColumnName = 'word'
-sentColumnName = 'sent'
+wordColumnName = 'answer'
+sentColumnName = 'question'
 Points = 0
 quizNum = []
 choice =  ['foo', 'bar', 'baz']
