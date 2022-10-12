@@ -9,10 +9,11 @@ import sys
 words = []
 sentences = []
 filepath = './test.csv'
-wordColumnName = 'word'
-sentColumnName = 'sent'
+wordColumnName = 'answer'
+sentColumnName = 'question'
 Points = 0
 quizNum = []
+choice =  ['foo', 'bar', 'baz']
 
 def argCheck():
 	global filepath
@@ -48,10 +49,77 @@ def checkAnswer(answer):
 	global Points
 	if (answer == words[quizNum[0]]):
 		print("Answer:", "正解!!!")
+		print("")
 		Points = 1 + Points
 	else:
 		print("Answer:", "不正解!!!")
+		print("正解は: "+ words[quizNum[0]] +"です")
+		print("")
 	del quizNum[0]
+
+def quiz1():
+	global quizNum
+	global sentences
+
+	for i in range(len(quizNum)):
+		print("・問題" + str(i+1) + ": " + sentences[quizNum[0]])
+		print("")
+		print("・回答 → ", end="")
+		
+		answer = input()
+		checkAnswer(answer)
+
+		if i != len(quizNum):
+			print("==========")
+			print("=↓次の問題↓=")
+			print("==========")
+			
+def quiz2():
+	global quizNum
+	global sentences
+	for i in range(len(quizNum)):
+		createChoice()
+		print("・問題" + str(i+1) + ": " + sentences[quizNum[0]])
+		print("")
+		for i in range(3):
+			print("選択肢 "+str(i+1)+" :" + str(choice[i]) +" | ", end="")
+		print("")
+		print("選択肢の番号を入力してください: ", end="")
+
+		inputJudge = False
+
+		while (not inputJudge):
+			try:
+				answer = int(input()) -1
+				if (answer <= 2 and answer >= 0):
+					checkAnswer(choice[answer])
+					inputJudge = True
+				else:
+					print("正しい選択肢の番号を入力してください: ", end="")
+			except:
+				print("正しい選択肢の番号を入力してください: ", end="")
+
+		if i != len(quizNum):
+			print("============")
+			print("=↓次の問題↓=")
+			print("============")
+			#time.sleep(1)
+
+def createChoice():
+	global choice
+	choice[0] = words[quizNum[0]]
+	
+	randValue = random.randint(0,len(words)-1)
+	while (quizNum[0] == randValue):
+		randValue = random.randint(0,len(words)-1)
+	choice[1] = words[randValue]
+
+	randValue2 = random.randint(0,len(words)-1)
+	while (quizNum[0] == randValue or randValue == randValue2):
+		randValue2 = random.randint(0,len(words)-1)
+	choice[2] = words[randValue2]
+
+	random.shuffle(choice)
 
 def main():
 	argCheck()
@@ -59,31 +127,40 @@ def main():
 	
 	global quizNum
 	global sentences
+	questionsNum = 0
+	MaxQuestionNum = 20
 	wordNum = len(words)
 	
-	if (wordNum < 20):
+	if (wordNum < MaxQuestionNum):
 		quizNum = list(range(wordNum))
+		questionsNum = wordNum
 	else:
-		quizNum = list(range(20))
+		quizNum = list(range(MaxQuestionNum))
+		questionsNum = MaxQuestionNum
 		
 	random.shuffle(quizNum)
 	
-	for i in range(len(quizNum)):
-		print("・題" + str(i+1) + ": " + sentences[quizNum[0]])
-		print("")
-		print("・回答 → ", end="")
+	print("どちらのクイズを選びますか?（1: 一致/2: 三択）")
+
+	inputJudge = False
+	while (not inputJudge):
+		try: 
+			modeselect = int(input())
+			if (modeselect == 1):
+				quiz1()
+				inputJudge = True
+			elif (modeselect == 2):
+				quiz2()
+				inputJudge = True
+			else:
+				print("正しい選択肢の番号を入力してください: ", end="")
+		except:
+			print("正しい選択肢の番号を入力してください: ", end="")
 		
-		answer = input()
-		checkAnswer(answer)
-		if i != len(quizNum):
-			print("==========")
-			print("=↓次の問題↓=")
-			print("==========")
-			#time.sleep(1)
-		
-	print("得点は "+ str(Points)+"点 です！")
+	print("得点は "+ str(Points)+"/" + str(questionsNum) + "点です！")
+	print("正答率: "+ str((Points/questionsNum)*100)+"% ")
 	print("End Quiz")
-		
+	
 	
 if __name__ == "__main__":
 	main()
