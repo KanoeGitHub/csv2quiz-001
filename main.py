@@ -2,7 +2,6 @@
 
 import random
 import pandas as pd
-import time
 import sys
 
 #Grobal Variable
@@ -103,7 +102,6 @@ def quiz2():
 			print("============")
 			print("=↓次の問題↓=")
 			print("============")
-			#time.sleep(1)
 
 def createChoice():
 	global choice
