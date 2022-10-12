@@ -16,4 +16,3 @@ csv to quiz project
 
 * If there is a blank in the column value, you will get an error.
 * The remaining number of questions is unknown.
-* I know how many questions I answered correctly at the end, but we can't know the statistical parameter.
