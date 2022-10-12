@@ -15,4 +15,4 @@ csv to quiz project
 ## issues at the moment
 
 * If there is a blank in the column value, you will get an error.
-* The remaining number of questions is unknown.
+
